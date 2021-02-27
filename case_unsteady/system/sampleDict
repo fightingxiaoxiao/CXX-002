@@ -1,0 +1,50 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version         2.0;
+    format          ascii;
+    class           dictionary;
+    object          sampleDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// The locations of the sample profiles correspond to:
+// Hargreaves-Wright (2007), Fig.6
+// DOI:10.1016/j.jweia.2006.08.002
+
+samples
+{
+    type                    sets;
+    libs                    (sampling);
+    setFormat               raw;
+    interpolationScheme     cell;
+    fields                  (U k epsilon nut omega);
+    writeControl            writeTime;
+
+    sets
+    (
+        x_0mPatch    // inlet patch face centres
+        {
+            type        face;
+            axis        z;
+            start       (5 0 0);
+            end         (5 0 5);
+        }
+        x_0mCell    // inlet-first cell centres
+        {
+            type        midPoint;
+            axis        z;
+            start       (5 0 0);
+            end         (5 0 5);
+        }
+    );
+}
+
+
+// *********************************************************************** //
