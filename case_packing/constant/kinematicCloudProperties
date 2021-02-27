@@ -115,7 +115,7 @@ subModels
 
     surfaceFilmModel none;
 
-    packingModel implicit;
+    packingModel explicit;
 
     explicitCoeffs
     {
