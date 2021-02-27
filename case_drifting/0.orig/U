@@ -34,8 +34,8 @@ boundaryField
     {
         type            pressureInletOutletVelocity;
         phi             phi;
-        inletValue      uniform (0 0 0);
-        value           uniform (0 0 0);
+        inletValue      uniform (1 0 0);
+        value           uniform (1 0 0);
     }
 
 }
