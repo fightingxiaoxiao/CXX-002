@@ -33,15 +33,15 @@ samples
         {
             type        face;
             axis        z;
-            start       (5 0 0);
-            end         (5 0 5);
+            start       (0.25 0.1 0);
+            end         (0.25 0.1 1);
         }
         x_0mCell    // inlet-first cell centres
         {
             type        midPoint;
             axis        z;
-            start       (5 0 0);
-            end         (5 0 5);
+            start       (0.25 0.1 0);
+            end         (0.25 0.1 1);
         }
     );
 }

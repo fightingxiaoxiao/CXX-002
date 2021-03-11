@@ -17,7 +17,7 @@ FoamFile
 // Make sure all utilities know specialised models
 libs            (atmosphericModels);
 
-application     MPPICInterFoam;
+application     MPPICFoamEx;
 
 startFrom       latestTime;
 
@@ -27,11 +27,11 @@ stopAt          endTime;
 
 endTime         10;
 
-deltaT          0.001;
+deltaT          0.0002;
 
 writeControl    timeStep;
 
-writeInterval   500;
+writeInterval   50;
 
 purgeWrite      0;
 
@@ -45,7 +45,7 @@ timeFormat      general;
 
 timePrecision   6;
 
-runTimeModifiable yes;
+runTimeModifiable no;
 
 maxAlphaCo      1.0;
 

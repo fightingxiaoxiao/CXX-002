@@ -15,22 +15,12 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 
-phases (water air);
+continuousPhase air;
 
-water
-{
-    transportModel  Newtonian;
-    nu              1e-06;
-    rho             1000;
-}
+rho.air         1.2;
 
-air
-{
-    transportModel  Newtonian;
-    nu              1.48e-05;
-    rho             1;
-}
+transportModel  Newtonian;
 
-sigma           0.07;
+nu              1.568e-05;
 
 // ************************************************************************* //

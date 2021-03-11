@@ -10,53 +10,59 @@ FoamFile
     version     2.0;
     format      ascii;
     class       dictionary;
-    object      fvSchemes;
+    object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-ddtSchemes
+// Make sure all utilities know specialised models
+libs            (atmosphericModels);
+
+application     MPPICFoamEx;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         END_TIME;
+
+deltaT          0.0002;
+
+writeControl    timeStep;
+
+writeInterval   50;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  12;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable no;
+
+maxAlphaCo      1.0;
+
+functions
 {
-    default         Euler;
-}
+    #include "sampleDict"
+    //#include "sampleIso"
+    //#include "samplePlanes"
 
-gradSchemes
-{
-    default             Gauss linear;
-}
+    minMax
+    {
+        type    fieldMinMax;
+        libs    (fieldFunctionObjects);
 
-divSchemes
-{
-    default                         none;
-
-    turbulence                          bounded Gauss QUICK;
-    div(alphaPhi.air,U.air)             $turbulence;
-    div(alphaPhi.air,k.air)             $turbulence;
-    div(alphaPhi.air,epsilon.air)       $turbulence;
-    div(alphaPhi.air,omega.air)         $turbulence;
-
-    div(((alpha.air*nuEff.air)*dev2(T(grad(U.air))))) Gauss linear;
-    
-    div(phiGByA,kinematicCloud:alpha)   Gauss linear;
-}
-
-laplacianSchemes
-{
-    default             Gauss linear uncorrected;
-}
-
-interpolationSchemes
-{
-    default             linear;
-}
-
-snGradSchemes
-{
-    default             uncorrected;
-}
-
-wallDist
-{
-    method              meshWave;
+        writeControl    writeTime;
+        fields          (U);
+    }
 }
 
 

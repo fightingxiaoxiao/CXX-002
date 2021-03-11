@@ -10,8 +10,15 @@ rasModel="kEpsilon"    # Tested options="kOmegaSST","kEpsilon"
 sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
     constant/turbulenceProperties
 
+python3 packing.py
+
 runApplication blockMesh
 
 runApplication renumberMesh -overwrite
+
+runApplication mapFields ../case_packing -sourceTime latestTime
+mv log.mapFields log.mapFields_lagrangian
+#runApplication setFields
+#runApplication mapFields ../case_steady -sourceTime latestTime
 
 runApplication $(getApplication)

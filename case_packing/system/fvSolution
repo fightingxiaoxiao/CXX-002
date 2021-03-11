@@ -16,20 +16,20 @@ FoamFile
 
 solvers
 {
-    "pcorr.*"
-    {
-        solver          PCG;
-        preconditioner  DIC;
-        tolerance       1e-5;
-        relTol          0;
-    }
-
     p_rgh
     {
-        solver          PCG;
-        preconditioner  DIC;
-        tolerance       1e-08;
-        relTol          0.05;
+        solver           GAMG;
+        smoother         GaussSeidel;
+        tolerance        1e-8;
+        relTol           0.0001;
+    }
+
+    p
+    {
+        solver           GAMG;
+        smoother         GaussSeidel;
+        tolerance        1e-8;
+        relTol           0.0001;
     }
 
     p_rghFinal
@@ -38,10 +38,16 @@ solvers
         relTol          0;
     }
 
+    pFinal
+    {
+        $p_rgh;
+        relTol          0;
+    }
+    
     "(U|k|epsilon|omega).*"
     {
         solver          smoothSolver;
-        smoother        symGaussSeidel;
+        smoother        GaussSeidel;
         tolerance       1e-06;
         relTol          0;
     }
@@ -50,28 +56,12 @@ solvers
     {
         solver          GAMG;
         tolerance       1e-06;
-        relTol          0.1;
+        relTol          0.0001;
         smoother        GaussSeidel;
         cacheAgglomeration true;
         nCellsInCoarsestLevel 10;
         agglomerator    faceAreaPair;
         mergeLevels     1;
-    }
-
-
-    "alpha.water.*"
-    {
-        nAlphaCorr      2;
-        nAlphaSubCycles 1;
-        cAlpha          1;
-
-        MULESCorr       yes;
-        nLimiterIter    3;
-
-        solver          smoothSolver;
-        smoother        symGaussSeidel;
-        tolerance       1e-8;
-        relTol          0;
     }
 }
 
@@ -80,9 +70,7 @@ PIMPLE
 {
     nNonOrthogonalCorrectors    0;
     nCorrectors                 3;
-    nOuterCorrectors            1;
-    pRefCell    0;
-    pRefValue    0;
+    nOuterCorrectors            2;
 }
 
 
@@ -90,14 +78,14 @@ relaxationFactors
 {
     equations
     {
-        U                    0.8;
-        "(k|epsilon|omega)"  0.8;
+        U.air                   0.8;
+        "(k|epsilon|omega).*"   0.8;
     }
 }
 
 cache
 {
-    grad(U);
+    grad(U.air);
 }
 
 

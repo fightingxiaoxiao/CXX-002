@@ -2,25 +2,40 @@
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
 |  \\    /   O peration     | Version:  v2012                                 |
-|   \\  /    A nd           | Website:  www.openfoam.com                      |
-|    \\/     M anipulation  |                                                 |
+|   \\  /    A nd           | Author: Chen Xiaoxiao                           |
+|    \\/     M anipulation  | Website: www.smilemax.top                       |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      decomposeParDict;
+    class       volScalarField;
+    object      p;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-numberOfSubdomains 16;
+dimensions      [0 2 -2 0 0 0 0];
 
-method             simple;
+internalField   uniform 0;
 
-coeffs
+boundaryField
 {
-    n              (8 2 1);
+    "(inlet|outlet|front|back)"
+    {
+        type            cyclic;
+    }
+
+    ground
+    {
+        type            fixedFluxPressure;
+        value           uniform 0;
+    }
+
+    top
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
 }
 
 

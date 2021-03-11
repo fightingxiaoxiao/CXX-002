@@ -20,15 +20,18 @@ solution
     active          true;
     coupled         true;
     transient       yes;
-    cellValueSourceCorrection off;
+    cellValueSourceCorrection on;
 
     maxCo           1.0;
 
     interpolationSchemes
     {
-        rho         cell;
-        U           cellPoint;
-        mu          cell;
+        rho.air         cell;
+        U.air           cellPoint;
+        k.air           cellPoint;
+        epsilon.air     cellPoint;
+        omega.air       cellPoint;
+        mu.air          cell;
     }
 
     averagingMethod dual;
@@ -49,8 +52,8 @@ solution
 
 constantProperties
 {
-    rho0            1000;
-    alphaMax        0.9;
+    rho0            300;
+    alphaMax        0.75;
 }
 
 subModels
@@ -59,9 +62,8 @@ subModels
     {
         WenYuDrag
         {
-            alphac      alphac;
+            alphac      alpha.air;
         }
-        gravity;
         gravity;
     }
 
@@ -72,7 +74,7 @@ subModels
             type            manualInjection;
             massTotal       0;
             parcelBasisType fixed;
-            nParticle       1000;
+            nParticle       5000;
             SOI             0;
             positionsFile   "kinematicCloudPositions";
             U0              (0 0 0);
@@ -81,13 +83,13 @@ subModels
                 type        fixedValue;
                 fixedValueDistribution
                 {
-                    value   0.001;
+                    value   0.0002;
                 }
             }
         }
     }
 
-    dispersionModel none;
+    dispersionModel stochasticDispersionRAS;
 
 
     patchInteractionModel localInteraction;
@@ -99,13 +101,13 @@ subModels
             top
             {
                 type rebound;
-                e    0.97;
+                e    0.90;
                 mu   0.09;
             }
             ground
             {
                 type rebound;
-                e    0.97;
+                e    0.90;
                 mu   0.09;
             }
         );

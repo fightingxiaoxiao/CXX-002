@@ -20,7 +20,7 @@ samples
     libs                    (sampling);
     setFormat               raw;
     interpolationScheme     cell;
-    fields                  (U k epsilon nut omega);
+    fields                  (U.air k.air epsilon.air nut.air omega.air);
     writeControl            writeTime;
 
     sets

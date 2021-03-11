@@ -95,9 +95,10 @@ class packingBox:
 
 
 def main():
-    diameter = 0.001
-    nParticles = 1000
-    box = packingBox([0., 0., -0.2], [5., 0.4, 2])
+    diameter = 0.0002
+    nParticles = 5000
+    box = packingBox([0., 0., 0.], [0.5, 0.2, 0.8])
+    #box = packingBox([0., 0., 0], [1e-32, 1e-32, 1e-32])
     cloud = packingCloud(box)
     cloud.generateParcels(diameter, nParticles)
     cloud.writeKinematicCloudPositions()

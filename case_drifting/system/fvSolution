@@ -16,62 +16,42 @@ FoamFile
 
 solvers
 {
-    "pcorr.*"
+    p
     {
-        solver          PCG;
-        preconditioner  DIC;
-        tolerance       1e-5;
-        relTol          0;
+        //solver          PCG;
+        //preconditioner  DIC;
+        solver           GAMG;
+        smoother         GaussSeidel;
+        tolerance        1e-8;
+        relTol           0.0001;
     }
 
-    p_rgh
+    pFinal
     {
-        solver          PCG;
-        preconditioner  DIC;
-        tolerance       1e-08;
-        relTol          0.05;
-    }
-
-    p_rghFinal
-    {
-        $p_rgh;
+        $p;
         relTol          0;
     }
 
     "(U|k|epsilon|omega).*"
     {
-        solver          smoothSolver;
-        smoother        symGaussSeidel;
+        //solver          smoothSolver;
+        solver          PBiCGStab;
+        //smoother        GaussSeidel;
+        preconditioner  DILU;
         tolerance       1e-06;
-        relTol          0;
+        relTol          0.0001;
     }
 
     kinematicCloud:alpha
     {
-        solver          GAMG;
-        tolerance       1e-06;
-        relTol          0.1;
-        smoother        GaussSeidel;
-        cacheAgglomeration true;
-        nCellsInCoarsestLevel 10;
-        agglomerator    faceAreaPair;
-        mergeLevels     1;
-    }
-
-
-    "alpha.water.*"
-    {
-        nAlphaCorr      2;
-        nAlphaSubCycles 1;
-        cAlpha          1;
-
-        MULESCorr       yes;
-        nLimiterIter    3;
-
-        solver          smoothSolver;
-        smoother        symGaussSeidel;
-        tolerance       1e-8;
-        relTol          0;
+        solver                  GAMG;
+        tolerance               1e-06;
+        relTol                  0.001;
+        smoother                GaussSeidel;
+        cacheAgglomeration      true;
+        nCellsInCoarsestLevel   10;
+        agglomerator            faceAreaPair;
+        mergeLevels             1;
     }
 }
 
@@ -80,9 +60,7 @@ PIMPLE
 {
     nNonOrthogonalCorrectors    0;
     nCorrectors                 3;
-    nOuterCorrectors            1;
-    pRefCell    0;
-    pRefValue    0;
+    nOuterCorrectors            2;
 }
 
 
@@ -90,14 +68,14 @@ relaxationFactors
 {
     equations
     {
-        U                    0.8;
-        "(k|epsilon|omega)"  0.8;
+        U.air                  0.9;
+        "(k|epsilon|omega).*"  0.9;
     }
 }
 
 cache
 {
-    grad(U);
+    grad(U.air);
 }
 
 

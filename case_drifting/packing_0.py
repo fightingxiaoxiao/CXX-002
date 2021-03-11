@@ -47,9 +47,28 @@ class packingCloud:
                 f_w.write("(\n")
                 for p in self.parcels:
                     f_w.write(
-                        "(%f %f %f)\n" % (p.position[0], p.position[1], p.position[2])
+                        "(%.12f %.12f %.12f)\n"
+                        % (p.position[0], p.position[1], p.position[2])
                     )
                 f_w.write(")\n")
+
+    def readKinematicCloudPositionsFromFile(self, dataDir):
+        with open(dataDir + "/lagrangian/kinematicCloud/positions", "r") as f:
+            for line in f:
+                line = line[:-1]
+                if len(line) < 1:
+                    continue
+                if line[0] == "(" and len(line.split()) > 1:
+                    line = line.replace("(", "")
+                    line = line.replace(")", "")
+                else:
+                    continue
+                pos = line.split()[:-1]
+                pos = np.array(pos).astype(np.float64)
+
+                parcel = kinematicParcel(None, None, None, pos)
+
+                self.parcels.append(parcel)
 
 
 class kinematicParcel:
@@ -59,7 +78,7 @@ class kinematicParcel:
         parcelSize:         parcel size
         particleDiameter:   particle diameter
         nParticles:         particle number per parcel
-        position:           center of parcel
+        position:           center of parcel(np.array)
         """
         self.parcelSize = parcelSize
         self.particleDiameter = particleDiameter
@@ -97,15 +116,22 @@ class packingBox:
         return int(self.x / size), int(self.y / size), int(self.z / size)
 
 
-def main():
-    diameter = 0.0002
-    nParticles = 5000
-    # box = packingBox([0., 0., 0.], [0.5, 0.2, 0.8])
-    box = packingBox([0.0, 0.0, 0], [1e-32, 1e-32, 1e-32])
+def createNewCloud():
+    diameter = 0.001
+    nParticles = 1000
+    box = packingBox([0.0, 0.0, 0.0], [1e-32, 1e-32, 1e-32])
     cloud = packingCloud(box)
     cloud.generateParcels(diameter, nParticles)
     cloud.writeKinematicCloudPositions()
 
 
+def readExistCloud():
+    box = packingBox([0.0, 0.0, 0.0], [1e-32, 1e-32, 1e-32])
+    cloud = packingCloud(box)
+
+    cloud.readKinematicCloudPositionsFromFile("../case_packing/4")
+    cloud.writeKinematicCloudPositions()
+
+
 if __name__ == "__main__":
-    main()
+    readExistCloud()

@@ -9,19 +9,12 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      decomposeParDict;
+    class       regIOobject;
+    location    "constant/polyMesh";
+    object      cellZones;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-numberOfSubdomains 16;
-
-method             simple;
-
-coeffs
-{
-    n              (8 2 1);
-}
-
+0()
 
 // ************************************************************************* //

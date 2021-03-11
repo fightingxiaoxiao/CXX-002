@@ -5,15 +5,10 @@ cd "${0%/*}" || exit                                # Run from this directory
 
 restore0Dir
 
-rasModel="kEpsilon"    # Tested options="kOmegaSST","kEpsilon"
-
-sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
-    constant/turbulenceProperties
+python3 packing.py
 
 runApplication blockMesh
 
 runApplication renumberMesh -overwrite
-
-python packing.py
 
 runApplication $(getApplication)

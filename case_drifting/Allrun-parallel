@@ -5,22 +5,23 @@ cd "${0%/*}" || exit                                # Run from this directory
 
 restore0Dir
 
-rasModel="kEpsilon"    # Tested options="kOmegaSST","kEpsilon"
+rasModel="kOmegaSST"    # Tested options="kOmegaSST","kEpsilon"
 
 sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
-    constant/turbulenceProperties
+    constant/turbulenceProperties.air
 
 python3 packing.py
 
 runApplication blockMesh
 
+#runApplication setFields
+runApplication mapFields ../case_packing -sourceTime latestTime 
+mv log.mapFields log.mapFields_lagrangian
+runApplication mapFields ../case_steady -sourceTime latestTime
+
 runApplication decomposePar
 
-runParallel mapFields ../case_packing -sourceTime latestTime
-
-runParallel mapFields ../case_steady -sourceTime latestTime
-
-runParallel renumberMesh -overwrite
+#runParallel renumberMesh -overwrite
 
 runParallel $(getApplication)
 

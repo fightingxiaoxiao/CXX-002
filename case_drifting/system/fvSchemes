@@ -26,27 +26,16 @@ gradSchemes
 
 divSchemes
 {
-    default             none;
+    default                         none;
 
-    div(rhoPhi,U)       bounded Gauss QUICK;
+    turbulence                      bounded Gauss QUICK;
+    div(alphaPhi.air,U.air)         $turbulence;
+    div(alphaPhi.air,k.air)         $turbulence;
+    div(alphaPhi.air,epsilon.air)   $turbulence;
+    div(alphaPhi.air,omega.air)     $turbulence;
 
-    turbulence          bounded Gauss QUICK;
-    div(rhoPhi,k)       $turbulence;
-    div(rhoPhi,omega)   $turbulence;
-    div(rhoPhi,epsilon) $turbulence;
-    div(phi,omega)      $turbulence;
-    div(phi,k)          $turbulence;
-    div(alphaRhoPhic,k)         $turbulence;
-    div(alphaRhoPhic,epsilon)   $turbulence;
-
-    //div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
-    //div((nuEff*dev2(T(grad(U)))))    Gauss linear;
-    div((((alphac*rho)*nuEff)*dev2(T(grad(U))))) Gauss linear;
-
-
-    div(phi,alpha)                      Gauss vanLeer;
-    div(phirb,alpha)                    Gauss linear;
-    div(phiGByA,kinematicCloud:alpha)   Gauss linear;
+    div(((alpha.air*nuEff.air)*dev2(T(grad(U.air)))))   Gauss linear;
+    div(phiGByA,kinematicCloud:alpha)                   Gauss linear;
 }
 
 laplacianSchemes
