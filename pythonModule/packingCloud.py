@@ -45,8 +45,7 @@ class packingCloud:
                 for p in self.parcels:
                     f_w.write('(%f %f %f)\n' % (p.position[0],
                                                 p.position[1],
-                                                p.position[2]))
-                f_w.write(')\n')
+                        p.position[2])
 
 
 class kinematicParcel:
