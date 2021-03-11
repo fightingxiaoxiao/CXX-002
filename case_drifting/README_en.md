@@ -2,7 +2,7 @@
 
 ## Language(多语言)
 
-[English(This page)](README_en.md) | [简体中文](README.md)
+[English(This page)](README_en.md)  |  [简体中文](README.md)
 
 ## Introduction
 
@@ -23,4 +23,4 @@ When you want to specify the mass flow rate (or average velocity) in a certain d
 
 > How do I install the extended solver to run this case?
 
-[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/)is a solver that highly depends on the OpenFOAM version. You should check the details of this solver in the [README](http://github.com/fightingxiaoxiao/DPMFoamEx/README.md) under[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/).
+[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/) is a solver that highly depends on the OpenFOAM version. You should check the details of this solver in the [README](http://github.com/fightingxiaoxiao/DPMFoamEx/README.md) under [DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/).

@@ -2,7 +2,7 @@
 
 ## 多语言(Language)
 
-[简体中文(本页面)](README.md) | [English](README_en.md)
+[简体中文(本页面)](README.md)  |  [English](README_en.md)
 
 ## 简介
 
