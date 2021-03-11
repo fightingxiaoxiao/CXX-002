@@ -1,22 +1,26 @@
-# 风致雪漂模拟
+# Simulation for drifting snow
 
-## 简介
+## Language(多语言)
 
-本算例用于模拟湍流风场下的雪颗粒运动。
+[English(This page)](README_en.md) | [简体中文](README.md)
 
-## 场映射
+## Introduction
 
-* 使用[case_packing算例](../case_packing)得到的拉格朗日场初始化雪堆。
-* 使用[case_steady算例](../case_steady)得到的流场信息初始化风场。
+This case is designed to reproduce the snow drifting in a turbulent wind field.
 
-## 求解器
+## Map Fields
 
-[case_drifting](.)算例采用作者自行扩展的求解器[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/)。
+* Map fields from [case_packing](../case_packing) to initialize the lagrangian field(snow packing bed).
+* Map fields from [case_steady](../case_steady) to initialize the velocity, pressure, turbulence information...
 
-> 为什么要扩展该求解器？
+## Solver
 
-当我们希望在周期性流场中指定某个方向的质量流率(或平均速度)时，需采用自定义源相（fvOptions）中的`meanVelocityForce`，但很遗憾的是OpenFOAM的原生求解器DPMFoam并未引入这一功能。
+[case_drifting](.) uses a custom solver [DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/).
 
-> 我要如何安装这一求解器以运行这一算例？
+> Why extend the origin DPM solver?
 
-[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/)是高度依赖OpenFOAM版本的求解器，您应当在[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/)下方的README中检查求解器的详细信息。
+When you want to specify the mass flow rate (or average velocity) in a certain direction in a periodic flow field, you need to use the `meanVelocityForce` in the custom source term module(fvOptions). Unfortunately, this feature is not provided by DPMFoam, which is the origin DPM solver in OpenFOAM.
+
+> How do I install the extended solver to run this case?
+
+[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/)is a solver that highly depends on the OpenFOAM version. You should check the details of this solver in the [README](http://github.com/fightingxiaoxiao/DPMFoamEx/README.md) under[DPMFoamEx](http://github.com/fightingxiaoxiao/DPMFoamEx/).

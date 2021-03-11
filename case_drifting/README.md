@@ -1,5 +1,9 @@
 # 风致雪漂模拟
 
+## 多语言(Language)
+
+[简体中文(本页面)](README.md) | [English](README_en.md)
+
 ## 简介
 
 本算例用于模拟湍流风场下的雪颗粒运动。
