@@ -19,33 +19,36 @@ class packingCloud:
         """
         # 估算颗粒团的尺寸
         # Estimate the size of the parcel
-        size = diameter * nParticles**(1/3)*2
+        size = diameter * nParticles**(1/3) * 2
         div = self.packingBox.divBySize(size)
         for i in range(div[0]):
             for j in range(div[1]):
                 for k in range(div[2]):
-                    position = np.array([self.packingBox.AA[0]+i*size+size/2,
-                                         self.packingBox.AA[1]+j*size+size/2,
-                                         self.packingBox.AA[2]+k*size+size/2])
+                    position = np.array([
+                        self.packingBox.AA[0] + i * size + size / 2,
+                        self.packingBox.AA[1] + j * size + size / 2,
+                        self.packingBox.AA[2] + k * size + size / 2])
 
                     self.parcels.append(kinematicParcel(size,
                                                         diameter,
                                                         nParticles,
                                                         position))
-                                                        
+
         print("Successfully generate %d parcels." % (div[0]*div[1]*div[2]))
 
     def writeKinematicCloudPositions(self):
-        with open('./constant/kinematicCloudPositions.template', 'r') as f:
-            with open('./constant/kinematicCloudPositions', 'w') as f_w:
+        with open("./constant/kinematicCloudPositions.template", "r") as f:
+            with open("./constant/kinematicCloudPositions", "w") as f_w:
                 for line in f:
                     f_w.write(line)
-                f_w.write('\n')
-                f_w.write('(\n')
+                f_w.write("\n")
+                f_w.write("(\n")
                 for p in self.parcels:
-                    f_w.write('(%f %f %f)\n' % (p.position[0],
-                                                p.position[1],
-                        p.position[2])
+                    f_w.write(
+                        "(%.12f %.12f %.12f)\n" % (p.position[0],
+                                                   p.position[1],
+                                                   p.position[2]))
+                f_w.write(")\n")
 
 
 class kinematicParcel:
@@ -55,7 +58,7 @@ class kinematicParcel:
         parcelSize:         parcel size
         particleDiameter:   particle diameter
         nParticles:         particle number per parcel
-        position:           center of parcel
+        position:           center of parcel(np.array)
         """
         self.parcelSize = parcelSize
         self.particleDiameter = particleDiameter
@@ -90,6 +93,4 @@ class packingBox:
         [output]
         div: list of divide number through x-direction, y-direction and z-direction
         """
-        return int(self.x/size), int(self.y/size), int(self.z/size)
-
-
+        return int(self.x / size), int(self.y / size), int(self.z / size)
