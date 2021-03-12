@@ -52,7 +52,7 @@ solution
 
 constantProperties
 {
-    rho0            600;
+    rho0            450;
     alphaMax        0.75;
 }
 
@@ -102,13 +102,11 @@ subModels
             {
                 type rebound;
                 e    0.01;
-                mu   0.99;
+                mu   0.8;
             }
             ground
             {
-                type rebound;
-                e    0.01;
-                mu   0.99;
+                type stick;
             }
         );
     }
