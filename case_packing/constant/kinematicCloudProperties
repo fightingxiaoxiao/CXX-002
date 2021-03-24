@@ -22,7 +22,7 @@ solution
     transient       yes;
     cellValueSourceCorrection on;
 
-    maxCo           0.5;
+    maxCo           1.0;
 
     interpolationSchemes
     {
