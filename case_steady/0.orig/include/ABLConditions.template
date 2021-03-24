@@ -12,7 +12,7 @@ flowDir              (1 0 0);
 zDir                 (0 0 1);       
 z0                   uniform 0.0002;
 d                    uniform 0.0;
-U_shear              0.31;
+U_shear              SHEAR_VEL;
 shearStressValue     #eval{$U_shear * $U_shear};
 
 // ************************************************************************* //

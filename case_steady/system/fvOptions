@@ -19,5 +19,5 @@ momentumSource
     type            meanVelocityForce;
     selectionMode   all;
     fields          (U);
-    Ubar            (6.577719 0 0);
+    Ubar            (6.577719 0 0); // u*=0.35
 }
