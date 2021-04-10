@@ -28,7 +28,7 @@ divSchemes
 {
     default                         none;
 
-    turbulence                          bounded Gauss upwind;
+    turbulence                          bounded Gauss QUICK;
     div(alphaPhi.air,U.air)             $turbulence;
     div(alphaPhi.air,k.air)             $turbulence;
     div(alphaPhi.air,epsilon.air)       $turbulence;

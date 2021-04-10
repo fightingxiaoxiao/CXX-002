@@ -15,10 +15,7 @@ limitations under the License.
 """
 
 import os
-dir = os.path.abspath(__file__)
-dir = os.path.dirname(dir)
-print("Run Python script in "+dir+"...")
-os.chdir(dir)
+os.chdir(os.path.dirname(__file__))
 
 import sys
 sys.path.append('..')

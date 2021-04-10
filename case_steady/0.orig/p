@@ -20,7 +20,7 @@ internalField   uniform 0;
 
 boundaryField
 {
-     "(inlet|outlet|front|back)"
+    "(inlet|outlet)"
     {
         type            cyclic;
     }
@@ -33,6 +33,11 @@ boundaryField
     top
     {
         type            zeroGradient;
+    }
+
+    sides
+    {
+        type            symmetry;
     }
 }
 

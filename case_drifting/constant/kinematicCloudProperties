@@ -52,7 +52,7 @@ solution
 
 constantProperties
 {
-    rho0            917;
+    rho0            300;
     alphaMax        0.75;
 }
 
@@ -60,7 +60,7 @@ subModels
 {
     particleForces
     {
-        ErgunWenYuDrag
+        WenYuDrag
         {
             alphac      alpha.air;
         }
@@ -80,14 +80,10 @@ subModels
             U0              (0 0 0);
             sizeDistribution
             {
-                type        gamma;
-                gammaDistribution
+                type        fixedValue;
+                fixedValueDistribution
                 {
-                   alpha        5.0;
-                   beta         40.0;
-                   meanValue    200e-6;
-                   maxValue     620e-6;
-                   minValue     20e-6;
+                    value   0.0002;
                 }
             }
         }
@@ -105,14 +101,14 @@ subModels
             top
             {
                 type rebound;
-                e    0.01;
-                mu   0.99;
+                e    0.90;
+                mu   0.09;
             }
             ground
             {
                 type rebound;
-                e    0.01;
-                mu   0.99;
+                e    0.90;
+                mu   0.09;
             }
         );
     }
@@ -128,7 +124,7 @@ subModels
         particleStressModel
         {
             type HarrisCrighton;
-            alphaPacked 0.75;
+            alphaPacked 0.65;
             pSolid 10.0;
             beta 2.0;
             eps 1.0e-7;
@@ -149,7 +145,7 @@ subModels
         particleStressModel
         {
             type HarrisCrighton;
-            alphaPacked 0.75;
+            alphaPacked 0.65;
             pSolid 5.0;
             beta 2.0;
             eps 1.0e-2;
@@ -163,7 +159,7 @@ subModels
         timeScaleModel
         {
             type nonEquilibrium;
-            alphaPacked 0.75;
+            alphaPacked 0.65;
             e 0.9;
         }
     }
@@ -176,7 +172,7 @@ subModels
         {
             type isotropic;
             alphaPacked 0.65;
-            e 0.6;
+            e 0.9;
         }
     }
 

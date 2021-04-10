@@ -25,13 +25,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         5000;
+endTime         50000;
 
 deltaT          1;
 
 writeControl    timeStep;
 
-writeInterval   1000;
+writeInterval   10000;
 
 purgeWrite      0;
 
@@ -50,6 +50,8 @@ runTimeModifiable yes;
 functions
 {
     #include "sampleDict"
+    //#include "sampleIso"
+    //#include "samplePlanes"
 
     minMax
     {

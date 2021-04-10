@@ -9,15 +9,38 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       dictionary;
-    object      fvOptions;
+    class       volScalarField;
+    object      epsilon;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-momentumSource
+dimensions      [0 2 -3 0 0 0 0];
+
+internalField   uniform 0.01;
+
+boundaryField
 {
-    type            meanVelocityForce;
-    selectionMode   all;
-    fields          (U);
-    Ubar            (8.397127635781 0 0); // u*=0.35
+    #include            "include/ABLConditions"
+
+    "(inlet|outlet|front|back)"
+    {
+        type            cyclic;
+    }
+
+    ground
+    {
+        type            epsilonWallFunction;
+        Cmu             $Cmu;
+        kappa           $kappa;
+        value           $internalField;
+    }
+
+    top
+    {
+        type            zeroGradient;
+    }
+
 }
+
+
+// ************************************************************************* //

@@ -20,22 +20,22 @@ FoamFile
     top
     {
         type            patch;
-        nFaces          25;
-        startFace       5365;
+        nFaces          200;
+        startFace       38020;
     }
     ground
     {
         type            wall;
         inGroups        1(wall);
-        nFaces          25;
-        startFace       5390;
+        nFaces          200;
+        startFace       38220;
     }
     inlet
     {
         type            cyclic;
         inGroups        1(cyclic);
-        nFaces          110;
-        startFace       5415;
+        nFaces          280;
+        startFace       38420;
         matchTolerance  0.0001;
         transform       unknown;
         neighbourPatch  outlet;
@@ -44,8 +44,8 @@ FoamFile
     {
         type            cyclic;
         inGroups        1(cyclic);
-        nFaces          110;
-        startFace       5525;
+        nFaces          280;
+        startFace       38700;
         matchTolerance  0.0001;
         transform       unknown;
         neighbourPatch  inlet;
@@ -54,8 +54,8 @@ FoamFile
     {
         type            cyclic;
         inGroups        1(cyclic);
-        nFaces          2750;
-        startFace       5635;
+        nFaces          3500;
+        startFace       38980;
         matchTolerance  0.0001;
         transform       unknown;
         neighbourPatch  back;
@@ -64,8 +64,8 @@ FoamFile
     {
         type            cyclic;
         inGroups        1(cyclic);
-        nFaces          2750;
-        startFace       8385;
+        nFaces          3500;
+        startFace       42480;
         matchTolerance  0.0001;
         transform       unknown;
         neighbourPatch  front;
