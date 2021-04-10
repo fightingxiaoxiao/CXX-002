@@ -20,7 +20,7 @@ method             scotch;
 
 coeffs
 {
-    n              (4 4 1);
+    n              (4 2 1);
 }
 
 

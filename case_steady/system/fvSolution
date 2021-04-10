@@ -26,15 +26,12 @@ solvers
 
     "(U|k|epsilon|omega)"
     {
-        solver           smoothSolver;
-        smoother         GaussSeidel;
+        //solver           smoothSolver;
+        //smoother         GaussSeidel;
+        solver          PBiCGStab;
+        preconditioner  DILU;
         tolerance        1e-8;
         relTol           0.0001;
-        
-        //solver          PBiCGStab;
-        //preconditioner  DILU;
-        //tolerance       1e-8;
-        //relTol          0.001;
     }
 }
 
