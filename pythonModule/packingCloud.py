@@ -35,7 +35,7 @@ class packingCloud:
         """
         # 估算颗粒团的尺寸
         # Estimate the size of the parcel
-        size = diameter * nParticles**(1/3) * 2
+        size = diameter * nParticles**(1/3) * 1.2
         div = self.packingBox.divBySize(size)
         for i in range(div[0]):
             for j in range(div[1]):

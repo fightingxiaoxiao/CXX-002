@@ -16,39 +16,27 @@ FoamFile
 
 solvers
 {
-    p_rgh
-    {
-        solver           GAMG;
-        smoother         GaussSeidel;
-        tolerance        1e-8;
-        relTol           0.0001;
-    }
-
     p
     {
         solver           GAMG;
         smoother         GaussSeidel;
-        tolerance        1e-8;
-        relTol           0.0001;
-    }
-
-    p_rghFinal
-    {
-        $p_rgh;
-        relTol          0;
+        tolerance        1e-6;
+        relTol           1e-4;
     }
 
     pFinal
     {
-        $p_rgh;
+        $p;
         relTol          0;
     }
     
     "(U|k|epsilon|omega).*"
     {
-        solver          smoothSolver;
+        solver          GAMG;
         smoother        GaussSeidel;
-        tolerance       1e-06;
+        //solver          PBiCGStab;
+        //preconditioner  DILU;
+        tolerance       1e-8;
         relTol          0;
     }
 
@@ -59,7 +47,7 @@ solvers
         relTol          0.0001;
         smoother        GaussSeidel;
         cacheAgglomeration true;
-        nCellsInCoarsestLevel 10;
+        nCellsInCoarsestLevel 500;
         agglomerator    faceAreaPair;
         mergeLevels     1;
     }
@@ -69,7 +57,7 @@ solvers
 PIMPLE
 {
     nNonOrthogonalCorrectors    0;
-    nCorrectors                 3;
+    nCorrectors                 2;
     nOuterCorrectors            2;
 }
 
@@ -78,8 +66,8 @@ relaxationFactors
 {
     equations
     {
-        U.air                   0.8;
-        "(k|epsilon|omega).*"   0.8;
+        U.air                   1.0;
+        "(k|epsilon|omega).*"   1.0;
     }
 }
 

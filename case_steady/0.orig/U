@@ -18,9 +18,13 @@ dimensions      [0 1 -1 0 0 0 0];
 
 internalField   uniform (0 0 0);
 
+
+
 boundaryField
 {
-    "(inlet|outlet)"
+    #include            "include/ABLConditions"
+    
+    "(inlet|outlet|front|back)"
     {
         type            cyclic;
     }
@@ -33,12 +37,7 @@ boundaryField
     top
     {
         type            fixedShearStress;
-        tau             (0.1225 0 0);
-    }
-
-    sides
-    {
-        type            symmetry;
+        tau             ($shearStressValue 0 0);
     }
 }
 

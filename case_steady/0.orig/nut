@@ -22,7 +22,7 @@ boundaryField
 {
     #include            "include/ABLConditions"
 
-    "(inlet|outlet)"
+    "(inlet|outlet|front|back)"
     {
         type            cyclic;
     }

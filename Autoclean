@@ -1,0 +1,8 @@
+cd case_steady_coarsen
+./Allclean
+cd ..
+
+cd case_steady
+./Allclean
+cd ..
+

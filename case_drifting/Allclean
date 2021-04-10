@@ -5,5 +5,4 @@ cd "${0%/*}" || exit                                # Run from this directory
 
 cleanCase0
 
-rm -f constant/turbulenceProperties
-rm -f constant/kinematicCloudPositions
+rm -f constant/turbulenceProperties.air

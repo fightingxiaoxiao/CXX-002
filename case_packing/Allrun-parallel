@@ -5,13 +5,18 @@ cd "${0%/*}" || exit                                # Run from this directory
 
 restore0Dir
 
-python3 packing.py
+rasModel="kOmegaSST"    # Tested options="kOmegaSST","kEpsilon"
+
+sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
+    constant/turbulenceProperties.air
+
+python3 packing.py -d 0.0002 -nP 5000 -h 0.25
 
 runApplication blockMesh
 
 runApplication decomposePar
 
-runParallel renumberMesh -overwrite
+#runParallel renumberMesh -overwrite
 
 runParallel $(getApplication)
 

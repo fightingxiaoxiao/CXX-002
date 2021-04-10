@@ -6,12 +6,13 @@
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 
-kappa                0.40;          // (HW:p. 358)
-Cmu                  0.09;          // (HW:p. 358)
-flowDir              (1 0 0);       // (HW:Fig. 1)
-zDir                 (0 0 1);       // (HW:Fig. 1)
-z0                   uniform 0.0002;  // (HW:Table 1)
+kappa                0.40;          
+Cmu                  0.09;          
+flowDir              (1 0 0);       
+zDir                 (0 0 1);       
+z0                   uniform 0.0002;
 d                    uniform 0.0;
-
+U_shear              0.35;
+shearStressValue     #eval{$U_shear * $U_shear};
 
 // ************************************************************************* //

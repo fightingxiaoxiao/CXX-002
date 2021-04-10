@@ -15,7 +15,10 @@ limitations under the License.
 """
 
 import os
-os.chdir(os.path.dirname(__file__))
+dir = os.path.abspath(__file__)
+dir = os.path.dirname(dir)
+print("Run Python script in "+dir+"...")
+os.chdir(dir)
 
 import sys
 sys.path.append('..')
@@ -23,9 +26,17 @@ sys.path.append('..')
 from pythonModule.packingCloud import *
 
 def main():
-    diameter = 0.0002
-    nParticles = 5000
-    box = packingBox([0., 0., 0.], [0.5, 0.2, 0.8])
+    argList = sys.argv
+
+    diameter = float(sys.argv[sys.argv.index("-d")+1])
+    print("The diameter of particle is %f" % diameter)
+
+    nParticles = int(sys.argv[sys.argv.index("-nP")+1])
+    print("The number of particles in one parcel is %d" % nParticles)
+
+    height = float(sys.argv[sys.argv.index("-h")+1])
+
+    box = packingBox([0., 0., -0.1], [1.0, 0.05, -0.1+height])
     #box = packingBox([0., 0., 0], [1e-32, 1e-32, 1e-32])
     cloud = packingCloud(box)
     cloud.generateParcels(diameter, nParticles)

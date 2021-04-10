@@ -22,8 +22,9 @@ solvers
         //preconditioner  DIC;
         solver           GAMG;
         smoother         GaussSeidel;
+        nCellsInCoarsestLevel   500;
         tolerance        1e-8;
-        relTol           0.0001;
+        relTol           0.001;
     }
 
     pFinal
@@ -49,7 +50,7 @@ solvers
         relTol                  0.001;
         smoother                GaussSeidel;
         cacheAgglomeration      true;
-        nCellsInCoarsestLevel   10;
+        nCellsInCoarsestLevel   500;
         agglomerator            faceAreaPair;
         mergeLevels             1;
     }
@@ -59,7 +60,7 @@ solvers
 PIMPLE
 {
     nNonOrthogonalCorrectors    0;
-    nCorrectors                 3;
+    nCorrectors                 2;
     nOuterCorrectors            2;
 }
 

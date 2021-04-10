@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Author: Chen Xiaoxiao                           |
+|    \\/     M anipulation  | Website: www.smilemax.top                       |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -3 0 0 0 0];
+
+internalField   uniform 0.01;
+
+boundaryField
+{
+    #include            "include/ABLConditions"
+
+    "(inlet|outlet|front|back)"
+    {
+        type            cyclic;
+    }
+
+    ground
+    {
+        type            epsilonWallFunction;
+        Cmu             $Cmu;
+        kappa           $kappa;
+        value           $internalField;
+    }
+
+    top
+    {
+        type            zeroGradient;
+    }
+}
+
+
+// ************************************************************************* //

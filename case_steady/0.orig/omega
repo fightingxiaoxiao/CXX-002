@@ -22,7 +22,7 @@ boundaryField
 {
     #include            "include/ABLConditions"
 
-    "(inlet|outlet)"
+     "(inlet|outlet|front|back)"
     {
         type            cyclic;
     }
@@ -38,11 +38,6 @@ boundaryField
     top
     {
         type            zeroGradient;
-    }
-
-    sides
-    {
-        type            symmetry;
     }
 
 }
