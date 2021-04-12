@@ -5,8 +5,13 @@ cd "${0%/*}" || exit                                # Run from this directory
 
 rasModel="kOmegaSST"    # Tested options="kOmegaSST","kEpsilon"
 
+shearVelocity="0.35"    # Friction velocity 
+                        # 剪切风速
 sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
     constant/turbulenceProperties
+    
+sed "s|SHEAR_VEL|$shearVelocity|g" 0.orig/include/ABLConditions.template > \
+    0.orig/include/ABLConditions
 
 restore0Dir
 
