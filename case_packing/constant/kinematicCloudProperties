@@ -52,7 +52,7 @@ solution
 
 constantProperties
 {
-    rho0            917;
+    rho0            150;
     alphaMax        0.75;
 }
 

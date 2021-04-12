@@ -23,7 +23,7 @@ runApplication decomposePar
 
 #runParallel renumberMesh -overwrite
 
-runParallel $(getApplication)
+#runParallel $(getApplication)
 
 #runParallel redistributePar -reconstruct -latestTime
 

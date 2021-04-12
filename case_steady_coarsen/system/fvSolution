@@ -18,20 +18,18 @@ solvers
 {
     p
     {
-        solver           GAMG;
-        smoother         GaussSeidel;
-        tolerance        1e-8;
-        relTol           0.0001;
+        solver              GAMG;
+        smoother            GaussSeidel;
+        tolerance           1e-8;
+        relTol              0.0001;
     }
 
     "(U|k|epsilon|omega)"
     {
-        //solver           smoothSolver;
-        //smoother         GaussSeidel;
-        solver          PBiCGStab;
-        preconditioner  DILU;
-        tolerance        1e-8;
-        relTol           0.0001;
+        solver              PBiCGStab;
+        preconditioner      DILU;
+        tolerance           1e-8;
+        relTol              0.0001;
     }
 }
 
@@ -47,9 +45,9 @@ relaxationFactors
 {
     equations
     {
-        p                       0.5;
-        U                       0.7;
-        "(k|epsilon|omega)"     0.8;
+        p                       0.8;
+        U                       0.9;
+        "(k|epsilon|omega)"     0.9;
     }
 }
 

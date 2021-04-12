@@ -10,7 +10,7 @@ rasModel="kOmegaSST"    # Tested options="kOmegaSST","kEpsilon"
 sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
     constant/turbulenceProperties.air
 
-python3 packing.py -d 0.0002 -nP 5000 -h 0.25
+python3 packing.py -d 0.0002 -nP 5000 -h 0.15
 
 runApplication blockMesh
 
