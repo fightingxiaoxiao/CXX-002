@@ -1,7 +1,8 @@
 /*/processor*
 /*/log.*
 /*/0
-/*/5000*
+/*/5000
+/*/100000
 /*/postProcessing
 /*/constant/polyMesh
 /pythonModule/__pycache__
