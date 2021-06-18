@@ -14,16 +14,18 @@ python3 packing.py
 
 runApplication blockMesh
 
-#runApplication setFields
-runApplication mapFields ../case_packing -sourceTime latestTime 
+runApplication mapFields ../case_packing_with_g -sourceTime latestTime 
 mv log.mapFields log.mapFields_lagrangian
+
+runApplication setFields
+
 runApplication mapFields ../case_steady -sourceTime latestTime
 
 runApplication decomposePar
 
 #runParallel renumberMesh -overwrite
 
-#runParallel $(getApplication)
+runParallel $(getApplication)
 
 #runParallel redistributePar -reconstruct -latestTime
 

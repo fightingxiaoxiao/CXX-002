@@ -2,7 +2,6 @@
 cd "${0%/*}" || exit                                # Run from this directory
 . ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
 #------------------------------------------------------------------------------
-
 rasModel="kOmegaSST"    # Tested options="kOmegaSST","kEpsilon"
 
 shearVelocity="0.35"    # Friction velocity 

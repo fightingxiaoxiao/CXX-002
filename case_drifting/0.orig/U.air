@@ -32,8 +32,8 @@ boundaryField
 
     top
     {
-        type            fixedShearStress;
-        tau             (0.1225 0 0);
+        type            fixedValue;
+        value           uniform (6.5 0 0);
     }
 }
 

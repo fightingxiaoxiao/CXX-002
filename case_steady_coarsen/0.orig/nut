@@ -29,22 +29,17 @@ boundaryField
 
     ground
     {
-        type            atmNutkWallFunction;
+        type            atmNutWallFunction;
         kappa           $kappa;
         Cmu             $Cmu;
         z0              $z0;
-        value           uniform 0.0;
+        value           uniform 0;
     }
 
     top
     {
         type            calculated;
         value           uniform 0;
-    }
-
-    sides
-    {
-        type            symmetry;
     }
 }
 

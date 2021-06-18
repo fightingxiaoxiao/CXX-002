@@ -29,7 +29,9 @@ boundaryField
 
     ground
     {
-        type            omegaWallFunction;
+        type            atmOmegaWallFunction;
+
+        z0              $z0;
         Cmu             $Cmu;
         kappa           $kappa;
         value           $internalField;

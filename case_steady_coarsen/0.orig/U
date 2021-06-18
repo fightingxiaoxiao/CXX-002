@@ -36,8 +36,8 @@ boundaryField
 
     top
     {
-        type            fixedShearStress;
-        tau             ($shearStressValue 0 0);
+        type            fixedValue;
+        value           uniform (6.84639 0 0);
     }
 }
 

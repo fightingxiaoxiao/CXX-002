@@ -22,7 +22,7 @@ solution
     transient       yes;
     cellValueSourceCorrection on;
 
-    maxCo           1.0;
+    maxCo           0.5;
 
     interpolationSchemes
     {
@@ -74,7 +74,7 @@ subModels
             type            manualInjection;
             massTotal       0;
             parcelBasisType fixed;
-            nParticle       5000;
+            nParticle       512;
             SOI             0;
             positionsFile   "kinematicCloudPositions";
             U0              (0 0 0);
@@ -95,7 +95,6 @@ subModels
 
     dispersionModel stochasticDispersionRAS;
 
-
     patchInteractionModel localInteraction;
 
     localInteractionCoeffs
@@ -110,9 +109,7 @@ subModels
             }
             ground
             {
-                type rebound;
-                e    0.01;
-                mu   0.99;
+                type stick;
             }
         );
     }
@@ -156,7 +153,7 @@ subModels
         }
     }
 
-    dampingModel none; //relaxation;
+    dampingModel relaxation;
 
     relaxationCoeffs
     {
@@ -175,8 +172,8 @@ subModels
         timeScaleModel
         {
             type isotropic;
-            alphaPacked 0.65;
-            e 0.6;
+            alphaPacked 0.75;
+            e 0.9;
         }
     }
 

@@ -15,45 +15,43 @@ FoamFile
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 // Make sure all utilities know specialised models
-libs            (atmosphericModels);
+libs                (atmosphericModels);
 
-application     MPPICFoamEx;
+application         MPPICFoam;
 
-startFrom       latestTime;
+startFrom           latestTime;
 
-startTime       0;
+startTime           0;
 
-stopAt          endTime;
+stopAt              endTime;
 
-endTime         10;
+endTime             50;
 
-deltaT          0.0002;
+deltaT              0.0002;
 
-writeControl    timeStep;
+writeControl        timeStep;
 
-writeInterval   50;
+writeInterval       50;
 
-purgeWrite      0;
+purgeWrite          0;
 
-writeFormat     ascii;
+writeFormat         binary;
 
-writePrecision  12;
+writePrecision      12;
 
-writeCompression off;
+writeCompression    off;
 
-timeFormat      general;
+timeFormat          general;
 
-timePrecision   6;
+timePrecision       6;
 
-runTimeModifiable no;
+runTimeModifiable   no;
 
-maxAlphaCo      1.0;
+maxAlphaCo          1.0;
 
 functions
 {
-    #include "sampleDict"
-    //#include "sampleIso"
-    //#include "samplePlanes"
+    #include    "sampleDict"
 
     minMax
     {
@@ -61,7 +59,7 @@ functions
         libs    (fieldFunctionObjects);
 
         writeControl    writeTime;
-        fields          (U);
+        fields          (U.air);
     }
 }
 

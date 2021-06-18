@@ -18,8 +18,10 @@ solvers
 {
     p
     {
-        solver           GAMG;
-        smoother         GaussSeidel;
+        //solver           GAMG;
+        //smoother         GaussSeidel;
+        solver           PCG;
+        preconditioner  DIC;
         tolerance        1e-8;
         relTol           0.0001;
     }
@@ -48,8 +50,8 @@ relaxationFactors
     equations
     {
         p                       0.5;
-        U                       0.7;
-        "(k|epsilon|omega)"     0.8;
+        U                       0.75;
+        "(k|epsilon|omega)"     0.75;
     }
 }
 

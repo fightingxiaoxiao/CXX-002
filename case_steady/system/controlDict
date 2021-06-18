@@ -25,15 +25,15 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         5000;
+endTime         50000;
 
 deltaT          1;
 
 writeControl    timeStep;
 
-writeInterval   1000;
+writeInterval   10000;
 
-purgeWrite      0;
+purgeWrite      5;
 
 writeFormat     ascii;
 
@@ -45,12 +45,11 @@ timeFormat      general;
 
 timePrecision   6;
 
-runTimeModifiable yes;
+runTimeModifiable no;
 
 functions
 {
     #include "sampleDict"
-
     minMax
     {
         type    fieldMinMax;

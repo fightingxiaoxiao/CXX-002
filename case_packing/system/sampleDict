@@ -20,7 +20,7 @@ samples
     libs                    (sampling);
     setFormat               raw;
     interpolationScheme     cell;
-    fields                  (U.air k.air epsilon.air nut.air omega.air);
+    fields                  (alpha.air);
     writeControl            writeTime;
 
     sets
@@ -29,16 +29,16 @@ samples
         {
             type        face;
             axis        z;
-            start       (0.25 0.1 -0.1);
-            end         (0.25 0.1 1.0);
+            start       (0.2 0.025 -0.05);
+            end         (0.2 0.025 5);
         }
 
         x_0mCell
         {
             type        midPoint;
             axis        z;
-            start       (0.25 0.1 -0.1);
-            end         (0.25 0.1 1.0);
+            start       (0.2 0.025 -0.05);
+            end         (0.2 0.025 5);
         }
     );
 }

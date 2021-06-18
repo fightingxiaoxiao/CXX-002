@@ -6,3 +6,10 @@ cd case_steady
 ./Allclean
 cd ..
 
+cd case_packing
+./Allclean
+cd ..
+
+cd case_drifting
+./Allclean
+cd ..

@@ -25,10 +25,9 @@ runParallel $(getApplication)
 
 runApplication reconstructPar -latestTime
 
-cd 5000
+cd 50000
 mv U U.air
 mv k k.air
 mv nut nut.air
 mv omega omega.air
-mv epsilon epsilon.air
 #------------------------------------------------------------------------------

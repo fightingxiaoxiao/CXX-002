@@ -27,7 +27,7 @@ class packingCloud:
         self.parcels = []
         self.packingBox = box
 
-    def generateParcels(self, diameter, nParticles):
+    def generateParcels(self, diameter, nParticles, limitNum, size_scale=1.5):
         """
         [input]
         diameter:   particle diameter
@@ -35,22 +35,35 @@ class packingCloud:
         """
         # 估算颗粒团的尺寸
         # Estimate the size of the parcel
-        size = diameter * nParticles**(1/3) * 1.2
+        size = diameter * nParticles**(1/3) * size_scale
         div = self.packingBox.divBySize(size)
-        for i in range(div[0]):
-            for j in range(div[1]):
-                for k in range(div[2]):
-                    position = np.array([
-                        self.packingBox.AA[0] + i * size + size / 2,
-                        self.packingBox.AA[1] + j * size + size / 2,
-                        self.packingBox.AA[2] + k * size + size / 2])
+        count = 0
 
-                    self.parcels.append(kinematicParcel(size,
-                                                        diameter,
-                                                        nParticles,
-                                                        position))
+        class jumpOut(Exception):
+            pass
+        try:
+            for k in range(div[2]):
+                for i in range(div[0]):
+                    for j in range(div[1]):
+                        if count >= limitNum:
+                            raise jumpOut()
+                        position = np.array([
+                            self.packingBox.AA[0] + i * size + size / 2,
+                            self.packingBox.AA[1] + j * size + size / 2,
+                            self.packingBox.AA[2] + k * size + size / 2])
 
-        print("Successfully generate %d parcels." % (div[0]*div[1]*div[2]))
+                        self.parcels.append(kinematicParcel(size,
+                                                            diameter,
+                                                            nParticles,
+                                                            position))
+                        count += 1
+
+        except jumpOut:
+            print("Successfully generate %d parcels." % (count))
+            return
+
+        print("Successfully generate %d parcels." % (count))
+        return
 
     def writeKinematicCloudPositions(self):
         with open("./constant/kinematicCloudPositions.template", "r") as f:

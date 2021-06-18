@@ -1,16 +1,19 @@
 #!/bin/sh
-cd "${0%/*}" || exit                                # Run from this directory
-. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
+cd "${0%/*}" || exit                         # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions # Tutorial run functions
 #------------------------------------------------------------------------------
 
 restore0Dir
 
-rasModel="kOmegaSST"    # Tested options="kOmegaSST","kEpsilon"
+rasModel="kOmegaSST" # Tested options="kOmegaSST","kEpsilon"
 
 sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
     constant/turbulenceProperties.air
 
-python3 packing.py -d 0.0002 -nP 5000 -h 0.15
+python3 packing.py -d 0.0002 -np 512 \
+    -sx 0.0 -sy 0.0 -sz -0.05 \
+    -l 0.25 -w 0.05 -h 0.4 \
+    -s 1.2 -vf 0.43 -fh 0.05
 
 runApplication blockMesh
 

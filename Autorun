@@ -17,8 +17,6 @@ shearVelocity="0.35"         # Friction velocity
 # 计算周期大气层边界的稳态流场(粗网格)
 echo "Now run case_steady in coarsen..."
 cd case_steady_coarsen
-sed "s|SHEAR_VEL|$shearVelocity|g" 0.orig/include/ABLConditions.template > \
-    0.orig/include/ABLConditions
 ./Allrun
 cd ..
 
@@ -26,17 +24,19 @@ cd ..
 # 计算周期大气层边界的稳态流场
 echo "\nNow run case_steady..."
 cd case_steady
-sed "s|SHEAR_VEL|$shearVelocity|g" 0.orig/include/ABLConditions.template > \
-    0.orig/include/ABLConditions
 ./Allrun-parallel
 cd ..
 
 # Get a packed snow bed
 # 计算雪颗粒的堆积
-#cd ../case_packing
-#./Allrun-parallel
+echo "\nNow run case_packing..."
+cd case_packing
+ ./Allrun-parallel
+cd ..
 
 # simulate the drifting snow
 # 计算风致雪漂
-#cd ../case_drifting
-#./Allrun-parallel
+echo "\nNow run case_packing..."
+cd case_drifting
+./Allrun-parallel
+cd ..

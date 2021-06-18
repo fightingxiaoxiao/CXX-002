@@ -29,10 +29,7 @@ boundaryField
 
     ground
     {
-        type            omegaWallFunction;
-        Cmu             $Cmu;
-        kappa           $kappa;
-        value           $internalField;
+        type            zeroGradient;
     }
 
     top

@@ -14,32 +14,53 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+import sys
+sys.path.append('..')
+
 import os
 dir = os.path.abspath(__file__)
 dir = os.path.dirname(dir)
 print("Run Python script in "+dir+"...")
 os.chdir(dir)
 
-import sys
-sys.path.append('..')
-
-from pythonModule.packingCloud import *
+import math
+from pythonModule.packingCloud import packingCloud,packingBox
 
 def main():
     argList = sys.argv
-
     diameter = float(sys.argv[sys.argv.index("-d")+1])
-    print("The diameter of particle is %f" % diameter)
+    print("The diameter of particle is %f m" % diameter)
 
-    nParticles = int(sys.argv[sys.argv.index("-nP")+1])
+    nParticles = int(sys.argv[sys.argv.index("-np")+1])
     print("The number of particles in one parcel is %d" % nParticles)
 
-    height = float(sys.argv[sys.argv.index("-h")+1])
+    startX = float(sys.argv[sys.argv.index("-sx")+1])
+    startY = float(sys.argv[sys.argv.index("-sy")+1])
+    startZ = float(sys.argv[sys.argv.index("-sz")+1])
+    print("The bed start point is (%f %f %f) m" % (startX, startY, startZ))
 
-    box = packingBox([0., 0., -0.1], [1.0, 0.05, -0.1+height])
+    length = float(sys.argv[sys.argv.index("-l")+1])
+    width = float(sys.argv[sys.argv.index("-w")+1])
+    height = float(sys.argv[sys.argv.index("-h")+1])
+    print("The bed size is (%f %f %f)(Radically) m" % (length, width, height))
+
+    scaleSize = float(sys.argv[sys.argv.index("-s")+1])
+    print("The scaleSize is %f" % scaleSize)
+
+    volFraction = float(sys.argv[sys.argv.index("-vf")+1])
+    print("The volume fraction is %f" % volFraction)
+
+    fixHeight = float(sys.argv[sys.argv.index("-fh")+1])
+    fixNumber = int(length*width*fixHeight*volFraction /
+                    (math.pi*4/3*(diameter/2)**3)/nParticles)
+    print("Limit bed height at %f m" % fixHeight)
+    print("Fix parcel number at %d" % fixNumber)
+
+    box = packingBox([startX, startY, startZ], [
+                     startX+length, startY+width, startZ+height])
     #box = packingBox([0., 0., 0], [1e-32, 1e-32, 1e-32])
     cloud = packingCloud(box)
-    cloud.generateParcels(diameter, nParticles)
+    cloud.generateParcels(diameter, nParticles, fixNumber, scaleSize)
     cloud.writeKinematicCloudPositions()
 
 

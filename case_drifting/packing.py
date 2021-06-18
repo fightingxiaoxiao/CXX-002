@@ -28,11 +28,11 @@ from pythonModule.packingCloud import *
 
 def main():
     diameter = 0.0002
-    nParticles = 5000
+    nParticles = 1024
     # box = packingBox([0., 0., 0.], [0.5, 0.2, 0.8])
     box = packingBox([0.0, 0.0, 0], [1e-32, 1e-32, 1e-32])
     cloud = packingCloud(box)
-    cloud.generateParcels(diameter, nParticles)
+    cloud.generateParcels(diameter, nParticles,0)
     cloud.writeKinematicCloudPositions()
 
 

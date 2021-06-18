@@ -29,11 +29,8 @@ boundaryField
 
     ground
     {
-        type            atmNutkWallFunction;
-        kappa           $kappa;
-        Cmu             $Cmu;
-        z0              $z0;
-        value           uniform 0.0;
+        type            calculated;
+        value           uniform 0;
     }
 
     top

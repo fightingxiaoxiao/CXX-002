@@ -16,9 +16,9 @@ FoamFile
 
 scale    1;
 
-X       1;
+X       0.5;
 Y       0.05;
-Z       10;
+Z       5;
 
 vertices
 (
@@ -35,7 +35,7 @@ vertices
 
 blocks
 (
-    hex (0 1 2 3 4 5 6 7) (5 1 50) simpleGrading (1 1 10)
+    hex (0 1 2 3 4 5 6 7) (1 1 20) simpleGrading (1 1 10)
 );
 
 edges

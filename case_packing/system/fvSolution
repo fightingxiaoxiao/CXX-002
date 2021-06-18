@@ -18,10 +18,12 @@ solvers
 {
     p
     {
-        solver           GAMG;
-        smoother         GaussSeidel;
+        solver          PCG;
+        preconditioner  DIC;
+        //solver           GAMG;
+        //smoother         GaussSeidel;
         tolerance        1e-6;
-        relTol           1e-4;
+        relTol           0.001;
     }
 
     pFinal
@@ -29,27 +31,37 @@ solvers
         $p;
         relTol          0;
     }
-    
+
     "(U|k|epsilon|omega).*"
     {
-        solver          GAMG;
-        smoother        GaussSeidel;
-        //solver          PBiCGStab;
-        //preconditioner  DILU;
-        tolerance       1e-8;
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        //solver          smoothSolver;
+        //smoother        GaussSeidel;
+        //solver           GAMG;
+        //smoother         GaussSeidel;
+        tolerance       1e-06;
+        relTol          0.0001;
+    }
+
+    "(U|k|epsilon|omega).*Final"
+    {
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        //solver        smoothSolver;
+        //smoother      GaussSeidel;
+        tolerance       1e-06;
         relTol          0;
     }
 
     kinematicCloud:alpha
     {
-        solver          GAMG;
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        //solver        GAMG;
+        //smoother      GaussSeidel;
         tolerance       1e-06;
-        relTol          0.0001;
-        smoother        GaussSeidel;
-        //cacheAgglomeration true;
-        //nCellsInCoarsestLevel 500;
-        agglomerator    faceAreaPair;
-        mergeLevels     1;
+        relTol          0;
     }
 }
 
@@ -66,8 +78,8 @@ relaxationFactors
 {
     equations
     {
-        U.air                   1.0;
-        "(k|epsilon|omega).*"   1.0;
+        U.air                  0.8;
+        "(k|epsilon|omega).*"  0.8;
     }
 }
 

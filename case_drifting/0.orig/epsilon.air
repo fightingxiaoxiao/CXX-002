@@ -16,7 +16,7 @@ FoamFile
 
 dimensions      [0 2 -3 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 0.0007;
 
 boundaryField
 {
@@ -29,10 +29,7 @@ boundaryField
 
     ground
     {
-        type            epsilonWallFunction;
-        Cmu             $Cmu;
-        kappa           $kappa;
-        value           $internalField;
+        type            zeroGradient;
     }
 
     top

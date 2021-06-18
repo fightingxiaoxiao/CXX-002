@@ -1,0 +1,30 @@
+#!/bin/sh
+cd "${0%/*}" || exit                         # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions # Tutorial run functions
+#------------------------------------------------------------------------------
+
+restore0Dir
+
+rasModel="kOmegaSST" # Tested options="kOmegaSST","kEpsilon"
+
+sed "s|RAS_MODEL|$rasModel|g" constant/turbulenceProperties.template > \
+    constant/turbulenceProperties.air
+
+python3 packing.py -d 0.0002 -np 512 \
+    -sx 0.0 -sy 0.0 -sz -0.05 \
+    -l 0.25 -w 0.05 -h 0.4 \
+    -s 1.2 -vf 0.41 -fh 1e-32
+
+runApplication blockMesh
+
+runApplication mapFields ../case_packing -sourceTime latestTime 
+
+runApplication decomposePar
+
+#runParallel renumberMesh -overwrite
+
+runParallel $(getApplication)
+
+runApplication reconstructPar -latestTime
+
+#------------------------------------------------------------------------------

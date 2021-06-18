@@ -14,34 +14,23 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-// The locations of the sample profiles correspond to:
-// Hargreaves-Wright (2007), Fig.6
-// DOI:10.1016/j.jweia.2006.08.002
-
 samples
 {
     type                    sets;
     libs                    (sampling);
     setFormat               raw;
-    interpolationScheme     cell;
+    interpolationScheme     cellPoint;
     fields                  (U k epsilon nut omega);
     writeControl            writeTime;
 
     sets
     (
-        x_0mPatch    // inlet patch face centres
-        {
-            type        face;
-            axis        z;
-            start       (0.25 0.1 0);
-            end         (0.25 0.1 1);
-        }
-        x_0mCell    // inlet-first cell centres
+        Uz   
         {
             type        midPoint;
             axis        z;
-            start       (0.25 0.1 0);
-            end         (0.25 0.1 1);
+            start       (0.5 0.025 0);
+            end         (0.5 0.025 10);
         }
     );
 }
